@@ -1,0 +1,16 @@
+from django.shortcuts import get_object_or_404, redirect, render
+from django.urls import reverse
+from django.http import HttpResponseRedirect
+from .models import Proceso
+
+def avanzar_proceso(request, proceso_id):
+    proceso = get_object_or_404(Proceso, id=proceso_id)
+    proceso.avanzar()
+    return HttpResponseRedirect(reverse('detalle_proceso', args=[proceso_id]))
+
+def cancelar_proceso(request, proceso_id):
+    proceso = get_object_or_404(Proceso, id=proceso_id)
+    proceso.cancelar()
+    return HttpResponseRedirect(reverse('detalle_proceso', args=[proceso_id]))
+
+def vista(request, 'insidencias/template.html')
