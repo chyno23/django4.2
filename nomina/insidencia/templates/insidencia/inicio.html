@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de Incidenciass</title>
+</head>
+<body>
+    <h1>Lista de Incidencia</h1>
+    <ul>
+        {% for insidencia in insidencias %}
+        <li>
+            {{ Insidencia.titulo }} - Estado: {{ Insidencia.estado }}
+            <form method="POST" action="{% url 'cambiar_estado' insidencia.id %}">
+                {% csrf_token %}
+                <button type="submit" name="accion" value="completar">Completar</button>
+                <button type="submit" name="accion" value="cancelar">Cancelar</button>
+            </form>
+        </li>
+        {% endfor %}
+    </ul>
+    <!-- crear_incidencia.html -->
+    <h1>Crear Incidencia</h1>
+
+    <form method="POST">
+        {% csrf_token %}
+        {{ form.as_p }}  <!-- Renderiza el formulario con los estilos personalizados -->
+        <button type="submit" class="btn btn-primary">Guardar Incidencia</button>
+    </form>
+
+    <!-- Agrega estilos adicionales según lo necesario -->
+    <style>
+        form {
+            max-width: 600px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #f8f9fa;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+        }
+    </style>
+
+</body>
+</html>
+
